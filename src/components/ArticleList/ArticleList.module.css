@@ -1,0 +1,7 @@
+.articleList {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    margin-bottom: 26px;
+}

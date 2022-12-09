@@ -5,9 +5,38 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #EBEEF3;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root {
+  /*font-family: Inter, sans-serif;*/
+}
+
+.ant-pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.ant-pagination > .ant-pagination-item-active {
+  background-color: #1890FF;
+  border-color: #1890FF;
+}
+
+.ant-pagination > .ant-pagination-item-active:hover {
+  border-color: #1890FF;
+}
+
+.ant-pagination-item.ant-pagination-item-active > a {
+  color: #FFFFFF !important;
+}
+
+.ant-tag {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

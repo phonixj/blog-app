@@ -1,0 +1,43 @@
+.button {
+    width: 109px;
+    height: 51px;
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    line-height: 28px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    transition: opacity 0.5s ease-out;
+    margin-right: 22px;
+}
+
+button:hover {
+    opacity: 0.6;
+
+}
+
+.sign-in {
+    position: relative;
+}
+
+.sign-in:after {
+    content: '';
+    position: absolute;
+    width: 57px;
+    height: 1px;
+    left: 26px;
+    bottom: 11px;
+    background-color: rgba(0, 0, 0, .6);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.sign-in:hover:after {
+    transform: scale(1);
+}
+
+.sign-up {
+    border: 1px solid #52C41A;
+    border-radius: 5px;
+    color: #52C41A;
+}

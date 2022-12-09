@@ -1,0 +1,22 @@
+.header {
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    height: 80px;
+    width: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title,
+.title:active {
+    line-height: 80px;
+    margin-left: 22px;
+    text-decoration: none;
+    color: black;
+}
+
+.auth {
+
+}

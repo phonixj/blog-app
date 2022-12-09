@@ -1,0 +1,13 @@
+.article-page {
+    width: 941px;
+    margin: 26px auto 26px;
+    min-height: 500px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.article-body {
+    margin-left: 19px;
+    padding-bottom: 20px;
+}

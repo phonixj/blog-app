@@ -1,0 +1,3 @@
+export const ARTICLES_LOAD = 'ARTICLES_LOAD';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
+export const GET_ARTICLE_BY_ID = 'GET_ARTICLE_BY_ID';
