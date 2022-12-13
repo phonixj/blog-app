@@ -41,3 +41,18 @@ button:hover {
     border-radius: 5px;
     color: #52C41A;
 }
+
+.create-article {
+    border: 1px solid #52C41A;
+    border-radius: 5px;
+    color: #52C41A;
+    width: 112px;
+    height: 31px;
+    font-size: 14px;
+}
+
+.log-out {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 27px;
+}

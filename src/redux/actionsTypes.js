@@ -1,3 +1,10 @@
 export const ARTICLES_LOAD = 'ARTICLES_LOAD';
 export const CHANGE_PAGE = 'CHANGE_PAGE';
 export const GET_ARTICLE_BY_ID = 'GET_ARTICLE_BY_ID';
+export const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
+export const LOGIN_USER = 'LOGIN_USER';
+export const ADD_USER_INFO = 'ADD_USER_INFO';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGOUT = 'LOGOUT';
+export const EDIT_USER = 'EDIT_USER';
+export const EDIT_ERROR = 'EDIT_ERROR';

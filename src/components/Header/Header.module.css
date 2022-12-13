@@ -1,3 +1,4 @@
+
 .header {
     font-family: Inter, sans-serif;
     font-size: 18px;
@@ -19,4 +20,15 @@
 
 .auth {
 
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    text-decoration: none;
+    color: black;
+    margin-right: 13px;
 }

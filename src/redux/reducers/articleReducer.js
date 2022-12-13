@@ -5,7 +5,6 @@ const initialState = {
   count: 0,
   page: 1,
   article: null,
-  articleId: null,
 };
 
 const articleReducer = (state = initialState, action) => {

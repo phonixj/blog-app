@@ -9,5 +9,7 @@
 
 .article-body {
     margin-left: 19px;
+    margin-right: 19px;
     padding-bottom: 20px;
+    word-wrap: break-word;
 }

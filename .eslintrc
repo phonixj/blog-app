@@ -29,6 +29,7 @@
   },
   "plugins": ["react", "prettier", "import"],
   "rules": {
+    "react/jsx-props-no-spreading": "off",
     "jsx-a11y/label-has-associated-control": [2, { "depth": 1 }],
     "default-param-last" : "off",
     "no-unused-vars": "warn",
