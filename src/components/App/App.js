@@ -8,6 +8,7 @@ import ArticlePage from '../ArticlePage';
 import SignUp from '../SignUp';
 import SignIn from '../SignIn';
 import EditProfile from '../EditProfile';
+import CreateNewArticle from '../CreateNewArticle';
 import { authCheckState } from '../../redux/actions';
 
 import './App.css';
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/profile" element={<EditProfile />} />
+        <Route path="/new-article" element={<CreateNewArticle />} />
         <Route path="*" element={<h1>Page not found</h1>} />
       </Route>
     </Routes>

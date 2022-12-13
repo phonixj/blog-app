@@ -27,7 +27,9 @@ const Header = () => {
         </Link>
         {isLogged ? (
           <div className={classes.profile}>
-            <Button text="Create article" btnClass="create-article" />
+            <Link to="/new-article">
+              <Button text="Create article" btnClass="create-article" />
+            </Link>
             <Link to="/profile" className={classes.username}>
               {username}
             </Link>

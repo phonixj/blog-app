@@ -20,6 +20,7 @@ const EditProfile = () => {
   const { usernameTaken, emailTaken, avatarImage } = useSelector(({ authReducer }) => {
     return authReducer;
   });
+
   const dispatch = useDispatch();
 
   const [avatarInput, setAvatarInput] = useState(avatarImage);
@@ -52,7 +53,7 @@ const EditProfile = () => {
   };
 
   return (
-    <form className={classes.signup} onSubmit={handleSubmit(onSubmit)}>
+    <form className={classes['edit-profile']} onSubmit={handleSubmit(onSubmit)}>
       <div className={classes.title}>Edit Profile</div>
       <label>
         <div className={classes.label}>Username</div>
