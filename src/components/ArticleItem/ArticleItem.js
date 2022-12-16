@@ -16,9 +16,10 @@ const ArticleItem = ({ article }) => {
   const { confirm } = Modal;
   const { title, description, tagList, createdAt, author, favoritesCount, slug, favorited } = article;
   const { pathname } = useLocation();
-  const { isLogged } = useSelector(({ authReducer }) => {
+  const { isLogged, username } = useSelector(({ authReducer }) => {
     return authReducer;
   });
+  const disableButton = !(author.username === username);
 
   const heartColor = favorited ? { color: 'red' } : { color: 'black' };
 
@@ -96,12 +97,20 @@ const ArticleItem = ({ article }) => {
       <div className={descriptionClasses.join(' ')}>{description}</div>
       {isLogged && articlePage && (
         <div className={classes['btn-block']}>
-          <Button danger className={classes.btn} onClick={showDeleteConfirm}>
+          <Button disabled={disableButton} danger className={classes.btn} onClick={showDeleteConfirm}>
             Delete
           </Button>
-          <Link to={`/articles/${slug}/edit`}>
-            <Button className={classes['btn-edit']}>Edit</Button>
-          </Link>
+          {disableButton ? (
+            <Link to={`/articles/${slug}/edit`} onClick={(e) => e.preventDefault()}>
+              <Button disabled className={classes['btn-edit']}>
+                Edit
+              </Button>
+            </Link>
+          ) : (
+            <Link to={`/articles/${slug}/edit`}>
+              <Button className={classes['btn-edit']}>Edit</Button>
+            </Link>
+          )}
         </div>
       )}
     </div>
