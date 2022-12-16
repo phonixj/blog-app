@@ -1,4 +1,12 @@
-import { ARTICLES_LOAD, CHANGE_PAGE, GET_ARTICLE_BY_ID } from '../actionsTypes';
+import {
+  ADD_ARTICLE_DATA,
+  ARTICLES_LOAD,
+  CHANGE_PAGE,
+  CREATE_ARTICLE,
+  GET_ARTICLE_BY_ID,
+  LIKE_ARTICLE,
+  UNLIKE_ARTICLE,
+} from '../actionsTypes';
 
 const initialState = {
   articleList: [],
@@ -17,6 +25,30 @@ const articleReducer = (state = initialState, action) => {
     }
     case GET_ARTICLE_BY_ID: {
       return { ...state, article: action.article };
+    }
+    case CREATE_ARTICLE: {
+      return { ...state, article: null };
+    }
+    case ADD_ARTICLE_DATA: {
+      return { ...state };
+    }
+    case LIKE_ARTICLE: {
+      const { articleList } = state;
+      const { data } = action;
+      const itemIndex = articleList.findIndex((article) => {
+        return article.slug === data.article.slug;
+      });
+      const nextArticleList = [...articleList.slice(0, itemIndex), data.article, ...articleList.slice(itemIndex + 1)];
+      return { ...state, articleList: nextArticleList };
+    }
+    case UNLIKE_ARTICLE: {
+      const { articleList } = state;
+      const { data } = action;
+      const itemIndex = articleList.findIndex((article) => {
+        return article.slug === data.article.slug;
+      });
+      const nextArticleList = [...articleList.slice(0, itemIndex), data.article, ...articleList.slice(itemIndex + 1)];
+      return { ...state, articleList: nextArticleList };
     }
     default:
       return state;

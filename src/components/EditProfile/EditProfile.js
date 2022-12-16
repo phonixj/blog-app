@@ -16,7 +16,6 @@ const EditProfile = () => {
   } = useForm({
     mode: 'onBlur',
   });
-
   const { usernameTaken, emailTaken, avatarImage } = useSelector(({ authReducer }) => {
     return authReducer;
   });
@@ -89,6 +88,7 @@ const EditProfile = () => {
           placeholder="New password"
           className={classes.input}
           {...register('newPassword', {
+            required: 'Required.',
             minLength: { value: 6, message: 'Your Password needs to be at least 6 characters.' },
             maxLength: { value: 40, message: 'Your Password needs to be at max 40 characters.' },
           })}
@@ -110,7 +110,7 @@ const EditProfile = () => {
             },
           })}
         />
-        {errors?.avatar && <div className={classes.error}>{errors?.avatar?.message}</div>}
+        {errors?.avatarUrl && <div className={classes.error}>{errors?.avatarUrl?.message}</div>}
       </label>
       <Button type="primary" size="large" htmlType="submit">
         Save

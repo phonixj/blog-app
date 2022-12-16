@@ -2,7 +2,10 @@ export default class BlogApi {
   _apiBase = 'https://blog.kata.academy/api/';
 
   async getArticleList(page = 1) {
-    const response = await fetch(`${this._apiBase}articles?limit=5&offset=${page - 1 === 0 ? 0 : (page - 1) * 5}`);
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${this._apiBase}articles?limit=5&offset=${page - 1 === 0 ? 0 : (page - 1) * 5}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     if (!response.ok) {
       throw new Error();
     }
@@ -11,7 +14,8 @@ export default class BlogApi {
   }
 
   async getArticle(slug) {
-    const response = await fetch(`${this._apiBase}articles/${slug}`);
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${this._apiBase}articles/${slug}`, { headers: { Authorization: `Bearer ${token}` } });
     if (!response.ok) {
       throw new Error();
     }
@@ -81,5 +85,79 @@ export default class BlogApi {
     });
     const result = await response.json();
     return result;
+  }
+
+  async createArticle({ title, text, shortDescription, tags }) {
+    const token = localStorage.getItem('token');
+    const tagList = tags.map((tag) => {
+      return tag.name;
+    });
+
+    const response = await fetch(`${this._apiBase}articles`, {
+      method: 'post',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify({
+        article: {
+          title,
+          description: shortDescription,
+          body: text,
+          tagList,
+        },
+      }),
+    });
+    const result = await response.json();
+    return result;
+  }
+
+  async editArticle({ title, shortDescription, text }, slug) {
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(`${this._apiBase}articles/${slug}`, {
+      method: 'put',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify({
+        article: {
+          title,
+          description: shortDescription,
+          body: text,
+        },
+      }),
+    });
+    const result = await response.json();
+    return result;
+  }
+
+  async deleteArticle(slug) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${this._apiBase}articles/${slug}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json;charset=utf-8' },
+      });
+      if (response.status === 403) {
+        throw new Error('Error');
+      }
+      return response;
+    } catch (e) {
+      return e.message;
+    }
+  }
+
+  async likeArticle(slug) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${this._apiBase}articles/${slug}/favorite`, {
+      method: 'post',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json;charset=utf-8' },
+    });
+    return response.json();
+  }
+
+  async unlikeArticle(slug) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${this._apiBase}articles/${slug}/favorite`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json;charset=utf-8' },
+    });
+    return response.json();
   }
 }

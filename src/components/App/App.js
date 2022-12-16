@@ -10,6 +10,7 @@ import SignIn from '../SignIn';
 import EditProfile from '../EditProfile';
 import CreateNewArticle from '../CreateNewArticle';
 import { authCheckState } from '../../redux/actions';
+import PrivateRoutes from '../PrivateRoutes/PrivateRoutes';
 
 import './App.css';
 
@@ -28,8 +29,11 @@ const App = () => {
         <Route path="/articles/:slug" element={<ArticlePage />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/profile" element={<EditProfile />} />
-        <Route path="/new-article" element={<CreateNewArticle />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/profile" element={<EditProfile />} />
+          <Route path="/new-article" element={<CreateNewArticle />} />
+          <Route path="/articles/:slug/edit" element={<CreateNewArticle />} />
+        </Route>
         <Route path="*" element={<h1>Page not found</h1>} />
       </Route>
     </Routes>

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import { getArticleById } from '../../redux/actions';
 import ArticleItem from '../ArticleItem';
+import Loader from '../Loader';
 
 import classes from './ArticlePage.module.css';
 
@@ -13,12 +14,19 @@ const ArticlePage = () => {
   const { article } = useSelector(({ articleReducer }) => {
     return articleReducer;
   });
+
+  const isLoad = useSelector(({ appReducer }) => {
+    return appReducer.loading;
+  });
+
   const { slug } = useParams();
   useEffect(() => {
     dispatch(getArticleById(slug));
   }, [slug]);
 
-  return (
+  return isLoad ? (
+    <Loader />
+  ) : (
     <div className={classes['article-page']}>
       {article && (
         <>

@@ -1,22 +1,30 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
-import { logoutUser } from '../../redux/actions';
+import { createArticle, logoutUser } from '../../redux/actions';
 import Button from '../Button';
 
 import classes from './Header.module.css';
 
 const Header = () => {
+  const navigate = useNavigate();
   const { isLogged, username, avatarImage } = useSelector(({ authReducer }) => {
     return authReducer;
   });
+
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logoutUser());
     localStorage.removeItem('token');
+    navigate('/');
+  };
+
+  const handleCreateArticle = () => {
+    dispatch(createArticle());
+    navigate('/new-article');
   };
 
   return (
@@ -27,9 +35,7 @@ const Header = () => {
         </Link>
         {isLogged ? (
           <div className={classes.profile}>
-            <Link to="/new-article">
-              <Button text="Create article" btnClass="create-article" />
-            </Link>
+            <Button text="Create article" btnClass="create-article" handleClick={handleCreateArticle} />
             <Link to="/profile" className={classes.username}>
               {username}
             </Link>

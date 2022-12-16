@@ -8,15 +8,39 @@ import {
   LOGIN_ERROR,
   LOGOUT,
   EDIT_ERROR,
+  DISPLAY_LOADING_ON,
+  DISPLAY_LOADING_OFF,
+  DISPLAY_ERROR_ON,
+  CREATE_ARTICLE,
 } from './actionsTypes';
 
 const blogApi = new BlogApi();
 
+export const loaderOn = () => {
+  return { type: DISPLAY_LOADING_ON };
+};
+
+export const loaderOff = () => {
+  return { type: DISPLAY_LOADING_OFF };
+};
+
+export const errorOn = (error) => {
+  return { type: DISPLAY_ERROR_ON, error };
+};
+
 export const articlesLoad = (page) => {
   return (dispatch) => {
-    blogApi.getArticleList(page).then((data) => {
-      dispatch({ type: ARTICLES_LOAD, articles: data.articles, count: data.articlesCount });
-    });
+    dispatch(loaderOn());
+    blogApi
+      .getArticleList(page)
+      .then((data) => {
+        dispatch({ type: ARTICLES_LOAD, articles: data.articles, count: data.articlesCount });
+        dispatch(loaderOff());
+      })
+      .catch(() => {
+        dispatch(loaderOff());
+        dispatch(errorOn('Something wrong..'));
+      });
   };
 };
 
@@ -26,9 +50,17 @@ export const changePage = (page) => {
 
 export const getArticleById = (id) => {
   return (dispatch) => {
-    blogApi.getArticle(id).then((dataArticle) => {
-      dispatch({ type: GET_ARTICLE_BY_ID, article: dataArticle.article });
-    });
+    dispatch(loaderOn());
+    blogApi
+      .getArticle(id)
+      .then((dataArticle) => {
+        dispatch({ type: GET_ARTICLE_BY_ID, article: dataArticle.article });
+        dispatch(loaderOff());
+      })
+      .catch(() => {
+        dispatch(loaderOff());
+        dispatch(errorOn('Something wrong..'));
+      });
   };
 };
 
@@ -58,12 +90,12 @@ export const logoutUser = () => {
 export const authCheckState = () => {
   return (dispatch) => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      dispatch(logoutUser());
+    if (token) {
+      return blogApi.getUser().then((user) => {
+        dispatch(addUserInfo(user));
+      });
     }
-    blogApi.getUser().then((user) => {
-      dispatch(addUserInfo(user));
-    });
+    return dispatch(logoutUser());
   };
 };
 
@@ -82,4 +114,30 @@ export const editUser = (userData) => {
       }
     });
   };
+};
+
+export const likeArticle = (data) => {
+  return { type: 'LIKE_ARTICLE', data };
+};
+
+export const unlikeArticle = (data) => {
+  return { type: 'UNLIKE_ARTICLE', data };
+};
+
+export const toggleLikeArticle = (slug, favorited) => {
+  return (dispatch) => {
+    if (favorited) {
+      blogApi.unlikeArticle(slug).then((res) => {
+        dispatch(unlikeArticle(res));
+      });
+    } else {
+      blogApi.likeArticle(slug).then((res) => {
+        dispatch(likeArticle(res));
+      });
+    }
+  };
+};
+
+export const createArticle = () => {
+  return { type: CREATE_ARTICLE };
 };

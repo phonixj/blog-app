@@ -23,13 +23,15 @@
     width: 66%;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    /*align-content: flex-start;*/
 }
 
 .header-right {
     display: flex;
     gap: 12px;
     align-items: center;
+    /*flex-wrap: wrap;*/
+    /*width: 20%;*/
 }
 
 .title {
@@ -50,17 +52,14 @@
 }
 
 .likes {
-    margin-left: 22px;
+    margin-left: 6px;
     position: relative;
     font-size: 12px;
+    margin-top: 4px;
 }
 
-.likes:before {
-    content: '♡';
-    position: absolute;
-    font-size: 22px;
-    left: -18px;
-    top: -9px;
+.heart {
+    color: red;
 }
 
 .tagList {
@@ -104,4 +103,21 @@
 
 .description-full-size {
     opacity: 0.5;
+    display: inline-block;
+}
+
+.btn-block {
+    display: inline-flex;
+    gap: 12px;
+    margin-left: 100px;
+}
+
+.btn-edit {
+    color: rgba(82, 196, 26, 1);
+    border: 1px solid #52C41A;
+}
+
+.btn-edit:hover {
+    color: rgba(82, 196, 26, 0.7) !important;
+    border-color: rgba(82, 196, 26, 0.7) !important;
 }

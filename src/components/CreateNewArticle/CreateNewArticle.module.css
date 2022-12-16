@@ -3,7 +3,7 @@
 
 .create-article {
     width: 938px;
-    height: 701px;
+    min-height: 701px;
     background-color: #FFFFFF;
     margin: 48px auto 12px auto;
     border: 1px solid #D9D9D9;
@@ -53,6 +53,10 @@
     resize: none;
 }
 
+.input--small {
+    width: 300px;
+}
+
 .input:hover,
 .input:focus {
     border: 1px solid #4096ff;
@@ -62,4 +66,32 @@
     position: absolute;
     color: rgba(245, 34, 45, 1);
     font-size: 14px;
+}
+
+.tags {
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn {
+    width: 136px;
+}
+
+.btn-add {
+    color: rgba(24, 144, 255, 1);
+    border-color: rgba(24, 144, 255, 1);
+    width: 136px;
+}
+
+.btn-send {
+    width: 319px;
 }
