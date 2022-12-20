@@ -78,6 +78,7 @@ const ArticleItem = ({ article }) => {
           {tagList.length > 0 && (
             <ul className={classes.tagList}>
               {tagList.map((tag) => {
+                if (tag === null) return null;
                 if (tag.length) {
                   return <Tag key={uniqid()}>{tag}</Tag>;
                 }

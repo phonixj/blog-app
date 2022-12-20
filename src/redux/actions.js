@@ -2,7 +2,6 @@ import BlogApi from '../services/blogApi';
 
 import {
   ARTICLES_LOAD,
-  CHANGE_PAGE,
   GET_ARTICLE_BY_ID,
   ADD_USER_INFO,
   LOGIN_ERROR,
@@ -42,10 +41,6 @@ export const articlesLoad = (page) => {
         dispatch(errorOn('Something wrong..'));
       });
   };
-};
-
-export const changePage = (page) => {
-  return { type: CHANGE_PAGE, page };
 };
 
 export const getArticleById = (id) => {

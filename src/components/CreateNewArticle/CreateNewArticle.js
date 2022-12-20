@@ -28,6 +28,8 @@ const CreateNewArticle = () => {
     defaultValues: { tags: [{ name: '' }] },
   });
 
+  const { fields, append, remove, replace } = useFieldArray({ name: 'tags', control });
+
   useEffect(() => {
     if (slug) {
       setTitle('Edit article');
@@ -38,6 +40,11 @@ const CreateNewArticle = () => {
       setValue('title', article.title);
       setValue('shortDescription', article.description);
       setValue('text', article.body);
+      replace(
+        article.tagList.map((tag) => {
+          return { name: tag };
+        })
+      );
     } else {
       setValue('title', '');
       setValue('shortDescription', '');
@@ -45,15 +52,12 @@ const CreateNewArticle = () => {
     }
   }, [slug, article]);
 
-  const { fields, append, remove } = useFieldArray({ name: 'tags', control });
-
   const onSubmit = (data) => {
     if (slug) {
-      blogApi.editArticle(data, slug);
+      blogApi.editArticle(data, slug).then(() => navigate('/articles'));
     } else {
-      blogApi.createArticle(data);
+      blogApi.createArticle(data).then(() => navigate('/articles'));
     }
-    navigate('/articles');
   };
 
   return (

@@ -109,8 +109,11 @@ export default class BlogApi {
     return result;
   }
 
-  async editArticle({ title, shortDescription, text }, slug) {
+  async editArticle({ title, shortDescription, text, tags }, slug) {
     const token = localStorage.getItem('token');
+    const tagList = tags.map((tag) => {
+      return tag.name;
+    });
 
     const response = await fetch(`${this._apiBase}articles/${slug}`, {
       method: 'put',
@@ -120,6 +123,7 @@ export default class BlogApi {
           title,
           description: shortDescription,
           body: text,
+          tagList,
         },
       }),
     });

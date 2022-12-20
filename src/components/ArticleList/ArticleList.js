@@ -2,16 +2,19 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from 'antd';
 import uniqId from 'uniqid';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import ArticleItem from '../ArticleItem';
-import { articlesLoad, changePage } from '../../redux/actions';
+import { articlesLoad } from '../../redux/actions';
 import Loader from '../Loader';
 import Error from '../Error';
 
 import classes from './ArticleList.module.css';
 
 const ArticleList = () => {
-  const { count, articleList, page } = useSelector(({ articleReducer }) => {
+  const navigate = useNavigate();
+  const { page = 1 } = useParams();
+  const { count, articleList } = useSelector(({ articleReducer }) => {
     return articleReducer;
   });
   const isLoad = useSelector(({ appReducer }) => {
@@ -36,9 +39,11 @@ const ArticleList = () => {
             })}
           </div>
           <Pagination
-            current={page}
+            current={Number(page)}
             total={count}
-            onChange={(pages) => dispatch(changePage(pages))}
+            onChange={(pages) => {
+              navigate(`/articles/page/${pages}`);
+            }}
             defaultPageSize="5"
             showSizeChanger={false}
             className="ant-pagination-item-active"

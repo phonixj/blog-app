@@ -1,7 +1,6 @@
 import {
   ADD_ARTICLE_DATA,
   ARTICLES_LOAD,
-  CHANGE_PAGE,
   CREATE_ARTICLE,
   GET_ARTICLE_BY_ID,
   LIKE_ARTICLE,
@@ -11,7 +10,6 @@ import {
 const initialState = {
   articleList: [],
   count: 0,
-  page: 1,
   article: null,
 };
 
@@ -19,9 +17,6 @@ const articleReducer = (state = initialState, action) => {
   switch (action.type) {
     case ARTICLES_LOAD: {
       return { ...state, articleList: [...action.articles], count: action.count };
-    }
-    case CHANGE_PAGE: {
-      return { ...state, page: action.page };
     }
     case GET_ARTICLE_BY_ID: {
       return { ...state, article: action.article };

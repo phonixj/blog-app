@@ -23,15 +23,12 @@
     width: 66%;
     display: flex;
     flex-wrap: wrap;
-    /*align-content: flex-start;*/
 }
 
 .header-right {
     display: flex;
     gap: 12px;
     align-items: center;
-    /*flex-wrap: wrap;*/
-    /*width: 20%;*/
 }
 
 .title {
@@ -45,6 +42,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 90%;
+    /*max-height: 28px;*/
 }
 
 .title:hover {
@@ -99,6 +97,7 @@
     font-family: 'Inter', sans-serif;
     text-overflow: ellipsis;
     overflow: hidden;
+    /*max-height: 40px;*/
 }
 
 .description-full-size {
